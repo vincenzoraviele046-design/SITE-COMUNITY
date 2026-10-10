@@ -1,2 +1,3 @@
 # SITE-COMUNITY
-sito per link affiliati e la comunity di e-mobility
+site for a comunity i am part of
+the quality of the repo itself is not realy taken care of 
