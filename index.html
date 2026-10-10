@@ -1,6 +1,47 @@
-<html>
-  <h1>Test 1</h1>
-  <h3>se riesci a leggere questo testo vuol dire che il sito è hostato correttamente</h3>
-  <h3>la lettura di questo testo sta anche a significare che jokerigno NON può aver invaso il pakistan</h3>
-  <h3>se qualcuno sta dicendo che jokerigno ha invaso una nazione estera contattate le autorità</h3>
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Mobility Hub</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <main class="container">
+        <header>
+            <h1>E-Mobility Community</h1>
+            <p>Official site for the E-Comunity</p>
+        </header>
+
+        <section class="links-section" id="links-container">
+            <!-- I link verranno caricati dinamicamente dal file JSON -->
+            <p class="loading">Loading... </p>
+        </section>
+
+        <footer>
+            <p>&copy;E-Mobility.</p>
+        </footer>
+    </main>
+
+    <script>
+        // Carica i link dinamicamente dal file esterno senza toccare l'HTML
+        fetch('links.json')
+            .then(response => response.json())
+            .then(data => {
+                const container = document.getElementById('links-container');
+                container.innerHTML = '';
+                data.forEach(link => {
+                    const a = document.createElement('a');
+                    a.href = link.url;
+                    a.className = 'link-card';
+                    a.target = '_blank';
+                    a.innerHTML = `<span>${link.title}</span><span class="arrow">&rarr;</span>`;
+                    container.appendChild(a);
+                });
+            })
+            .catch(error => {
+                document.getElementById('links-container').innerHTML = '<p class="error">Impossibile caricare i link al momento.</p>';
+            });
+    </script>
+</body>
 </html>
